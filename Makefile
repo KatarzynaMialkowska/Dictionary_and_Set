@@ -72,7 +72,7 @@ testA: $(EXEC1)
 
 .PHONY: setSimple
 setSimple: testA
-	@echo "\n*ZADANIE A*\n"
+	@echo "\n*setSimple\n"
 	@./$(EXEC1) 
 
 ##setLinkede##
