@@ -49,7 +49,6 @@ public:
 
     Iterator erase(Iterator it){
         if(it->prev == nullptr && it->next == nullptr){
-            it->x = 0;
             guard->prev = nullptr;
             guard->next = nullptr;  
             --N;
@@ -62,13 +61,11 @@ public:
         }else if(it->prev == nullptr &&  it->next != nullptr){
             it->next->prev = nullptr;
             guard->prev = it->next;
-            it->x = 0;
             --N;
             return Iterator(begin());
         }else{
             it->prev->next = it->next;
             it->next->prev = it->prev;
-            it->x = 0;
             --N;
             return Iterator(it->next);
         }
@@ -129,6 +126,21 @@ public:
         }
 
     } // Wstawia element x w porządku rosnącym
+
+    template<class U>
+    void insert(U&& x){
+        if(empty()){
+            push_back(x);
+        }else{
+            Iterator it(begin());
+            while(it != end()) {
+                if(*it == x) break;
+                ++it;
+            }    
+            if(it == end()) push_back(x);
+        }
+    }
+     // Wstawia element x bez powtorzen
   /*----------------------------------------------------------------------------------------------*/
     T last(){
         if(empty()) 
@@ -159,7 +171,7 @@ template <class T>
 LinkedList<T>::LinkedList(): guard(new Node()), N(0){
     guard->prev = nullptr;
     guard->next = nullptr;
-    guard->x = 0;
+
 }
 
 template <class T>
@@ -167,7 +179,7 @@ LinkedList<T>::LinkedList(const LinkedList<T> &obj) {
    // std::cout<<"Jestem konstruktorem kopiujacym"<<std::endl; 
     Node *copy = obj.guard->prev;
     guard = new Node();
-    N=obj.N;
+    N = obj.N;
     while(copy!=nullptr)
     {
         push_back(copy->x);

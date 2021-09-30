@@ -4,6 +4,19 @@ int main() {
     std::srand(unsigned(std::time(NULL)));
     setSimple<int> A, B, C;
 
+    setSimple<std::string>D,E,F;
+
+    D.insert("ABCD");
+    
+    E.insert("EFGH");
+    
+    D.view();
+    E.view();
+
+    F = D + E;
+
+    F.view();
+
     generator(A, 100, 100);
     std::cout << "A:\n";
     A.view();

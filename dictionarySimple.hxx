@@ -67,10 +67,11 @@ class DictonarySimple {
     }
 
     void insert(std::string x) {
-        if(size>=0 && size<N)set[size] = x;
-        else std::cout<<"size error\n";
-    
-        if(size < N)size++;
+        
+        if(size>=0 && size<N) {
+            if(!find(x)) set[size] = x;
+            size++;
+        }else std::cout<<"size error\n";
     }
 
     bool find(std::string x) {
@@ -106,11 +107,10 @@ class DictonarySimple {
 };
 
 void generator(DictonarySimple& obj, const int& n) {  
-    static std::uniform_int_distribution<int> dist1 ( 65, 90 );
+    static std::uniform_int_distribution<int> dist1 ( 97, 122 );
     static std::mt19937 gen ( time ( NULL ) );
     std::string word;
     for( int i = 0; i < n; i++ ) {
-        word+=(char)dist1(gen);
         word+=(char)dist1(gen);
         word+=(char)dist1(gen);
         obj.insert(word);

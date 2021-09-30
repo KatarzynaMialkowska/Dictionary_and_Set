@@ -6,6 +6,9 @@ NAME3 = generator
 NAME4 = tester
 NAME5 = setSimpleBool
 NAME6 = dictionarySimple
+NAME7 = set
+NAME8 = setHashed
+
 
 CXX1 = $(NAME1).cxx
 CXX2 = $(NAME2).cxx
@@ -13,6 +16,8 @@ CXX3 = $(NAME3).cxx
 CXX4 = $(NAME4).cxx
 CXX5 = $(NAME5).cxx
 CXX6 = $(NAME6).cxx
+CXX7 = $(NAME7).cxx
+CXX8 = $(NAME8).cxx
 
 EXEC1 = $(NAME1).x
 EXEC2 = $(NAME2).x
@@ -20,13 +25,15 @@ EXEC3 = $(NAME3).x
 EXEC4 = $(NAME4).x
 EXEC5 = $(NAME5).x
 EXEC6 = $(NAME6).x
+EXEC7 = $(NAME7).x
+EXEC8 = $(NAME8).x
 
 CO=g++
 FLAGS= -std=c++11
 
 
 .PHONY: all
-all: $(EXEC1) $(EXEC2) $(EXEC3) $(EXEC4) $(EXEC5) $(EXEC6)
+all: $(EXEC1) $(EXEC2) $(EXEC3) $(EXEC4) $(EXEC5) $(EXEC6) $(EXEC7) $(EXEC8)
 
 
 $(EXEC1):
@@ -47,6 +54,11 @@ $(EXEC5):
 $(EXEC6): 
 	$(CO) -o $@ $(CXX6) $(FLAGS)
 
+$(EXEC7): 
+	$(CO) -o $@ $(CXX7) $(FLAGS)
+
+$(EXEC8): 
+	$(CO) -o $@ $(CXX8) $(FLAGS)
 
 
 ##dictionarySimple##
@@ -75,18 +87,37 @@ setSimple: testA
 	@echo "\n*setSimple\n"
 	@./$(EXEC1) 
 
-##setLinkede##
+##setLinked#
 testB: $(EXEC2)
 
-.PHONY: setLinkede
-setLinkede: testB
-	@echo "\n*ZADANIE B*\n"
+.PHONY: setLinked
+setLinked: testB
+	@echo "\n*setLinked*\n"
 	@./$(EXEC2) 
 
-##setSimple vs setLinkede##
+
+##set##
+testS: $(EXEC7) 
+
+.PHONY: set
+set: testS
+	@echo "\n*set*\n"
+	@./$(EXEC7) 
+
+
+##setHashed##
+testH: $(EXEC8)
+
+.PHONY: setHashed
+setHashed: testH
+	@echo "\n*setHashed*\n"
+	@./$(EXEC8) 
+
+
+##setSimple vs setLinkede vs setHashed##
 testAB: $(EXEC3) $(EXEC4)
 compare: testAB
-	@echo "\n*setSimple vs setLinkede*\n"
+	@echo "\n*setSimple vs setLinkede vs setHashed*\n"
 	@./$(EXEC3) 10000 10000 | ./$(EXEC4)
 
 

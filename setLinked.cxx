@@ -4,6 +4,18 @@
 int main() {
     std::srand(unsigned(std::time(NULL)));
     setLinked<int> A, B, C;
+    setLinked<std::string>D,E,F;
+
+    D.insert("ABCD");
+    
+    E.insert("EFGH");
+    
+    D.view();
+    E.view();
+
+    F = D + E;
+
+    F.view();
 
     generator(A, 100, 100);
     std::cout << "A:\n";
